@@ -23,5 +23,5 @@ Thank you!
 
 # Live-Preview
 
-Live Preview: 
+Live Preview: https://naapi-yupi.github.io/Rock-Paper-Scissors/
 
