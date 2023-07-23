@@ -1,14 +1,8 @@
 alert("Let's play rock-paper-scissors")
 
-let roundCount = 1;
-function playerSelection() {
-    let pick = prompt("Round no. " + roundCount + " Choose between: Rock - Paper - Scissors");
+function playerSelection(playerSelect) {
+    let pick = playerSelect;
     pick = pick.toLowerCase();
-    while (pick != "rock" && pick != "paper" && pick != "scissors") {
-        pick = prompt("Invalid! Choose between the 3: Rock - Paper - Scissors");
-        pick = pick.toLowerCase();
-    }
-    roundCount++;
     return pick
 }
 
@@ -44,29 +38,59 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let player = playerSelection();
-    let computerSelection = getComputerChoice();
-    return playRound(player, computerSelection);
-}
 
-//alert(game());
+const buttons = document.querySelectorAll('button');
 
 let playerScore = 0;
 let computerScore = 0;
-for (let i = 1; i <= 5; i++) {
 
-    if (game() === "You Win!") {
-        playerScore++;
-    }
-    else {
-        computerScore++
-    }
-}
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.textContent === "Rock") {
+            let winner = playRound(playerSelection("Rock"), getComputerChoice());
+            if (winner === "You Win!") {
+                playerScore++;
+            }
+            else {
+                computerScore++;
+            }
+        }
+        else if (button.textContent === "Paper") {
+            let winner = playRound(playerSelection("Paper"), getComputerChoice());
+            if (winner === "You Win!") {
+                playerScore++;
+            }
+            else {
+                computerScore++;
+            }
+        }
+        else if (button.textContent === "Scissors") {
+            let winner = playRound(playerSelection("Scissors"), getComputerChoice());
+            if (winner === "You Win!") {
+                playerScore++;
+            }
+            else {
+                computerScore++;
+            }
+        }
 
-if (playerScore > computerScore) {
-    alert("You Win! " + playerScore + " - " + computerScore)
-}
-else {
-    alert("You Lose! " + playerScore + " - " + computerScore)
-}
+        const disScore = document.getElementById("score");
+        disScore.textContent = playerScore + " - " + computerScore;
+        if (playerScore === 5 || computerScore === 5) 
+        {
+            let result = playerScore === 5 ? "You win!" : "You lose!";
+            buttons.forEach((button) => {button.disabled = true;});
+
+            const disResult = document.getElementById("result")
+            disResult.textContent = result;
+        }
+
+    });
+});
+
+
+
+
+
+
+
